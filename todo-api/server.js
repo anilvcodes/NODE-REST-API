@@ -48,10 +48,30 @@ res.json(todo);
 });
 
 app.post("todos/",(req,res)=>{
+    const{title,description}=req.body;
+    if(!title || !description){
+        return res.status(404).json({
+            msg:" title and description are required "
+
+        });
+    }
+ const newTodo={
+    id:newDate(),
+    title,
+    description,
+ }
+ todos.push(newTodo);
+
+
+  res.status(201).json({
+    message: "Todo created successfully",
+    todo: newTodo,
+  });
+
 
 })
 
-app.put("todos/"=>(req,res)=>{
+app.put("todos/",(req,res)=>{
     
 })
 
