@@ -84,10 +84,15 @@ app.put("/todos/:id", (req, res) => {
     });
 });
 
+app.delete("/todos/:id", (req, res) => {
+    const id = req.params.id;
 
-app.delete("todos/",(req,res)=>{
+    todos = todos.filter(t => t.id != id);
 
-})
+    res.json({
+        message: "Todo deleted successfully"
+    });
+});
 
 const PORT = 3000;
 
