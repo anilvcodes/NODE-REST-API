@@ -71,9 +71,18 @@ app.post("todos/",(req,res)=>{
 
 })
 
-app.put("todos/",(req,res)=>{
-    
-})
+app.put("/todos/:id", (req, res) => {
+    const todo = {
+        id: req.params.id,
+        title: req.body.title,
+        description: req.body.description
+    };
+
+    res.json({
+        message: "Todo updated successfully",
+        todo: todo
+    });
+});
 
 
 app.delete("todos/",(req,res)=>{
