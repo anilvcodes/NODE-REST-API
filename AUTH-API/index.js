@@ -5,32 +5,43 @@ app.use(express.json());
 
 mongoose.connect("mongodb://127.0.0.1:27017/userDB");
  const User = mongoose.model(`Users`,{
-    username:"String",
-    email:"String",
-    password:"String",
+    username:String,
+    email:String,
+    password:String,
     
  });
   
  app.post("/register",async function(req,res) {
     const username=req.body.username;
     const email=req.body.email;
-    const password=req.body.email;
+    const password=req.body.password;
     
-    const userexist= await User.findOne({ email:username } );
+    const userexist= await User.findOne({ email:email } );
     if(userexist){
         return res.status(400).send("user alredy exist");
     }
     const user= new User({
-        name:name,
+        username:username,
         email:email,
         password:password,
     });
 
-    user.save();
+     await user.save();
     res.json({
         "msg":"user register "
     })
  })
+
+
+ app.get("/register",async(req,res)=>{
+try{
+const users=  await User.find();
+res.json(users)
+} 
+catch (error){
+    res.status(500).send(error.message);
+}
+ });
 
 app.listen(3000, () => {
   console.log("Server running on port 3000");
