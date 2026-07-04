@@ -5,8 +5,10 @@ app.use(express.json());
 
 mongoose.connect("mongodb://127.0.0.1:27017/userDB");
  const User = mongoose.model(`Users`,{
+    schoolname:String,
     username:String,
     email:String,
+    address:String,
     password:String,
     
  });
@@ -15,14 +17,19 @@ mongoose.connect("mongodb://127.0.0.1:27017/userDB");
     const username=req.body.username;
     const email=req.body.email;
     const password=req.body.password;
+    const schoolname=req.body.schoolname;
+    const address=req.body.address;
     
     const userexist= await User.findOne({ email:email } );
     if(userexist){
         return res.status(400).send("user alredy exist");
     }
     const user= new User({
+        schoolname:schoolname,
         username:username,
         email:email,
+        address:address,
+        
         password:password,
     });
 
