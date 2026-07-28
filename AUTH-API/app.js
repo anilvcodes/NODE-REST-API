@@ -6,7 +6,7 @@ const app =express();
 app.use(express.json());
 connectDB();
 const userRoutes = require("./routes/userRoutes");
-app.use("/api/users", userRoutes);
+app.use("/api", userRoutes);
 
 
 app.listen(3000,()=>{
