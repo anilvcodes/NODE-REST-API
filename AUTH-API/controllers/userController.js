@@ -1,3 +1,4 @@
+
 const User = require("../models/User");
 
 // Register User
@@ -44,6 +45,12 @@ const getUsers = async (req, res) => {
     });
   }
 };
+
+
+
+
+
+
 
 module.exports = {
   registerUser,
