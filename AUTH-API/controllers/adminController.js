@@ -1,49 +1,54 @@
-const Admin=require("../models/Admin");
+const Admin = require("../models/Admin");
 
-const registerAdmin= async(req,res)=>{
-   try{
+const registerAdmin = async (req, res) => {
+  try {
+    const { adminname, email, password } = req.body;
 
-    const { registerAdmin,email,password}=req.body;
-    const adminExist= await Admin.findOne({email});
-    if (adminExist){
-       return res.json({
-        msg:"admin already exist",
-        })
+    const adminExist = await Admin.findOne({ email });
+
+    if (adminExist) {
+      return res.json({
+        msg: "Admin already exists",
+      });
     }
-   } 
-   catch(err){
-    res.json({
-        msg:err.message,
-    })
-     const admin = new Admin({
-        adminname,
-        email,
-        password,
-     })
-     await admin.save();
+
+    const admin = new Admin({
+      adminname,
+      email,
+      password,
+    });
+    console.log(admin);
+
+    await admin.save();
+
+    return res.json({
+      msg: "Admin registered successfully",
+      admin,
      
-     res.json({
-        msg:" admin registered successfuly",
-        admin,
+    });
+     
 
-     })
+  } catch (err) {
+    return res.json({
+      msg: err.message,
+    });
+  }
+};
 
-   }
-}
+const getAdmin = async (req, res) => {
+  try {
+    const admin = await Admin.find();
+     console.log(admin);
+    return res.status(200).json(admin);
+    
+  } catch (err) {
+    return res.json({
+      msg: err.message,
+    });
+  }
+};
 
-const getAdmin= async(req,res)=>{
-    try{
-        const admin= await Admin.find();
-         res.status(200).json(admin);
-    }
-    catch(err){
-        res.json({
-            msg:err.message,
-        })
-
-    }
-}
-module.exports={ 
-    registerAdmin,
-    getAdmin,
-}
+module.exports = {
+  registerAdmin,
+  getAdmin,
+};

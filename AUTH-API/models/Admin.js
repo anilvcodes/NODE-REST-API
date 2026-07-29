@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const adminSchema = new monogoose.Schema(
+const adminSchema = new mongoose.Schema(
   {
     adminname: {
       type: String,
@@ -16,7 +16,7 @@ const adminSchema = new monogoose.Schema(
     },
   },
   {
-    timerstaup: true,
+    timestamps: true,
   },
 );
 module.exports = mongoose.model("Admin", adminSchema);
