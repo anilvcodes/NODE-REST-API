@@ -13,18 +13,24 @@ const registerUser = async (req, res) => {
         msg: "User already exists",
       });
     }
+ const hash = await bcrypt.hash(password, 10);
 
-    const user = new User({
+  const user = new User({
       username,
       email,
-      password,
+      password: hash
     });
 
-    await user.save();
+     const token = generateToken(user._id);
 
     res.status(201).json({
       msg: "User registered successfully",
-      user,
+      token,
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+      },
     });
   } catch (error) {
     res.status(500).json({
