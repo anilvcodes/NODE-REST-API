@@ -1,12 +1,20 @@
 
 const User = require("../models/User");
+const { registerSchema } = require("../validations/userValidation");
+
 
 // Register User
 const registerUser = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+      const validation = registerSchema.safeParse(req.body);
 
-    const userExist = await User.findOne({ email });
+    if (!validation.success) {
+      return res.status(400).json({
+        errors: validation.error.flatten().fieldErrors,
+      });
+    }
+
+    const { username, email, password } = validation.data;
 
     if (userExist) {
       return res.status(400).json({
