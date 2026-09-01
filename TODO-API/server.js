@@ -94,8 +94,8 @@ app.delete("/todos/:id", (req, res) => {
     });
 });
 
-const PORT = 3000;
 
-app.listen(PORT, () => {
+
+app.listen(3000, () => {
   console.log(`Server running on port ${PORT}`);
 });
