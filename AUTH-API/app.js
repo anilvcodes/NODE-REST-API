@@ -5,8 +5,7 @@ const connectDB= require("./config/db");
 const app =express();
 app.use(express.json());
 connectDB();
-const userRoutes = require("./routes/userRoutes");
-app.use("/api", userRoutes);
+
 const adminRoutes = require("./routes/adminRoutes");
 app.use("/api", adminRoutes);
 
