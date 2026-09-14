@@ -5,12 +5,14 @@ const router = express.Router();
 
 const {
   registerAdmin,
+  loginAdmin,
   getAdmin,
 } = require("../controllers/AdminController");
 
 
 
 router.post("/admin",registerAdmin);
-router.get("/admin",getAdmin);
+router.post("/login",loginAdmin);
+router.get("/",getAdmin);
 
 module.exports = router;
