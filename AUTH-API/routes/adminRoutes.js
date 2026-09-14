@@ -7,7 +7,7 @@ const {
   registerAdmin,
   loginAdmin,
   getAdmin,
-} = require("../controllers/AdminController");
+} = require("../controllers/adminController");
 
 
 
